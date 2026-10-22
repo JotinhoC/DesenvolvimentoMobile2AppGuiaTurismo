@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:guia_turismo/controllers/camera_controller.dart';
 import 'package:guia_turismo/controllers/lugares_controller.dart';
 import 'package:guia_turismo/controllers/theme_controller.dart';
-import 'package:guia_turismo/inicializar.dart';
 import 'package:guia_turismo/screens/cadastro_lugar.dart';
 import 'package:guia_turismo/screens/lugares_screen.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +30,7 @@ class _InicializarState extends State<Inicializar> {
         //builder: (context, lugaresController, child) => 
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: 'cadastro',
+          initialRoute: 'lugares',
           routes: {
             'lugares': (context) => LugaresScreen(),
             'cadastro': (context) => CadastroLugar(),

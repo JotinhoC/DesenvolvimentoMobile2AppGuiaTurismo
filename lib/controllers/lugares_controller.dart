@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guia_turismo/models/lugares_model.dart';
 import 'package:guia_turismo/services/lugares_service.dart';
-import 'package:http/http.dart' as http;
 
 class LugaresController extends ChangeNotifier{
   bool carregando = false;

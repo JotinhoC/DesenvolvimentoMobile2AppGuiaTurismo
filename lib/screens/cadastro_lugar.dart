@@ -1,8 +1,7 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:guia_turismo/controllers/camera_controller.dart';
+import 'package:guia_turismo/models/lugares_model.dart';
+import 'package:guia_turismo/services/lugares_service.dart';
 import 'package:provider/provider.dart';
 
 class CadastroLugar extends StatefulWidget {
@@ -13,7 +12,97 @@ class CadastroLugar extends StatefulWidget {
 }
 
 class _CadastroLugarState extends State<CadastroLugar> {
+  //=====================================================
+  final _nomeController = TextEditingController();
+  final _descController = TextEditingController();
+  final _latiController = TextEditingController();
+  final _longiController = TextEditingController();
+  final _categoriaIdController = TextEditingController();
+  final _token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkyNjI2NDIyLCJleHAiOjE3OTI3MTI4MjJ9.XMdsk_1pP-e9B9ZRpV9Vd_Tk93oijekFb02owwgJrLM";
+  //=====================================================
   @override
+
+  void abrirFormulario(){
+    showDialog(context: context, 
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Cadastro"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _nomeController,
+                decoration: InputDecoration(
+                  label: Text("Nome")
+                ),
+              ),
+              SizedBox(height: 20,),
+
+              TextField(
+                controller: _descController,
+                decoration: InputDecoration(
+                  label: Text("Descrição")
+                ),
+              ),
+              SizedBox(height: 20,),
+
+              TextField(
+                controller: _latiController,
+                decoration: InputDecoration(
+                  label: Text("Latitude")
+                ),
+              ),
+              SizedBox(height: 20,),
+
+              TextField(
+                controller: _longiController,
+                decoration: InputDecoration(
+                  label: Text("Longitude")
+                ),
+              ),
+              SizedBox(height: 20,),
+
+              TextField(
+                controller: _categoriaIdController,
+                decoration: InputDecoration(
+                  label: Text("Categoria ID")
+                ),
+              ),
+              SizedBox(height: 20,),
+            ],
+          ),
+
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: Text("Cancelar")),
+            TextButton(onPressed: (){
+              _salvarDados();
+            }, child: Text("Salvar"))
+          ],
+        );
+      });
+  }
+
+  void _salvarDados () async {
+    final novoLugar = LugaresModel(
+      nome: _nomeController.text, 
+      descricao: _descController.text,
+      latitude: double.parse(_latiController.text), 
+      longitude: double.parse(_longiController.text), 
+      categoriaId: int.parse(_categoriaIdController.text)
+      );
+
+      LugaresService().cadastrarLugar(novoLugar, _token);
+
+      _nomeController.clear();
+      _descController.clear();
+      _latiController.clear();
+      _longiController.clear();
+      _categoriaIdController.clear();
+      Navigator.of(context).pop;
+  }
+
+  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<CameraController>(
@@ -43,6 +132,10 @@ class _CadastroLugarState extends State<CadastroLugar> {
                 ),
               ],
             ),
+
+            FloatingActionButton(onPressed: (){
+              abrirFormulario();
+            }, child: Icon(Icons.add),)
           ],
         ),
         ),

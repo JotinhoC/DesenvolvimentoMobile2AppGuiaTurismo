@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class LugaresService {
   //https://guiaturismo.onrender.com/lugares?pagina=1&limite=10
-  String url = "https://guiaturismo.onrender.com/lugares";
+  String url = "https://guia.liliaborges.com.br/lugares";
   int pagina = 1;
   int limite = 10;
 

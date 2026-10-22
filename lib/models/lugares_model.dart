@@ -1,5 +1,5 @@
 class LugaresModel {
-  final int id;
+  final int? id;
   final String nome;
   final String? categoria;
   final double latitude;
@@ -8,7 +8,7 @@ class LugaresModel {
   final int categoriaId;
 
   LugaresModel({
-    required this.id,
+    this.id,
     required this.nome,
     required this.latitude,
     required this.longitude,
